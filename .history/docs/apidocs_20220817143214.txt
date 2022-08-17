@@ -1,0 +1,5 @@
+get-->
+
+mainpage(signup and login forms){
+    signup(org):{name,orgization,og.mail,}
+}

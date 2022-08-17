@@ -1,0 +1,6 @@
+get-->
+
+mainpage(signup and login forms){
+    signup(org):{name,orgization,org.mail,password,confirm-password,submit};
+    sighup(cust):
+}
