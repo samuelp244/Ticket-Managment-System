@@ -1,0 +1,29 @@
+form{
+    margin-top: 20px;
+    padding: 5rem;
+    width: 15rem;
+    
+    display: flex;
+    flex-direction: column;
+    background-color: bisque;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+
+}
+
+button{
+    margin-top: 20px;
+    width: 5rem;
+    color
+    
+}
+
+input{
+    border: none;
+    height: 1.3rem;
+    border-radius: 4px;
+}

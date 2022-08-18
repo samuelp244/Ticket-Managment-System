@@ -1,0 +1,35 @@
+form{
+    margin:auto;
+    padding: 5rem;
+    border: 1px solid rgb(39, 119, 240);
+    border-radius: 10px;
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+
+}
+
+button{
+    margin-top: 20px;
+    width: 5rem;
+    height: 1.5rem;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(39, 119, 240);
+    border: none;
+    
+}
+
+input{
+    border: 1px solid rgb(39, 119, 240);
+    height: 1.3rem;
+    border-radius: 4px;
+}

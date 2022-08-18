@@ -1,0 +1,9 @@
+.footer{
+    width: 100%;
+    max-height: max-content;
+    position: fixed;
+    align-items: center;
+    text-align: ;
+    bottom: 0;
+    background-color: bisque;
+}
