@@ -42,7 +42,7 @@ app.post('/api/v1/registerCustomer',async (req:Request,res:Response)=>{
 
 app.post('/api/v1/loginUser',async (req:Request,res:Response)=>{
     const user = await User.findOne({
-        username:req.body.username,
+        email:req.body.email,
         password:req.body.password
     })
     // console.log(user)
@@ -55,7 +55,7 @@ app.post('/api/v1/loginUser',async (req:Request,res:Response)=>{
 
 app.post('/api/v1/loginCustomer',async (req:Request,res:Response)=>{
     const user = await Customer.findOne({
-        username:req.body.username,
+        email:req.body.email,
         password:req.body.password
     })
     // console.log(user)
