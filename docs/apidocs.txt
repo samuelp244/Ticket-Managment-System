@@ -32,5 +32,6 @@ login(cust) Post Req---> http://localhost:1337/api/v1/loginCustomer
     "email":"",
     "password":""
 }
+
 success--> status:'ok', user:true
 error--> status:'error', user:false
