@@ -1,6 +1,0 @@
-get-->
-
-mainpage(signup and login forms){
-    signup(org-root-main):{name,orgization,org.mail,password,confirm-password,submit};
-    sighup(cust):{name,email,password}
-}
