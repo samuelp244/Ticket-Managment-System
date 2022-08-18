@@ -10,6 +10,17 @@ signup(root-user) Post Req---> http://localhost:1337/api/v1/registerRootUser
 success--> status:'ok'
 error--> status:'error'
 
+
+signup(user) Post Req---> http://localhost:1337/api/v1/registerUser
+{
+    "username":"",
+    "organization":"",
+    "email":"",
+    "password":""
+}
+success--> status:'ok'
+error--> status:'error'
+
 signup(cust) Post Req---> http://localhost:1337/api/v1/registerCustomer
 {
     "username":"",

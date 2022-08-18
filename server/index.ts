@@ -25,6 +25,21 @@ app.post('/api/v1/registerRootUser',async (req:Request,res:Response)=>{
     }
 })
 
+app.post('/api/v1/registerUser',async (req:Request,res:Response)=>{
+    try {
+        await User.create({
+            username: req.body.username,
+            organization: req.body.organization,
+            role:'User',
+            email: req.body.email,
+            password: req.body.password
+        })
+        res.json({status:'ok'})
+    } catch (err){
+        res.json({status:'error',error:'credentials already exists'})
+    }
+})
+
 app.post('/api/v1/registerCustomer',async (req:Request,res:Response)=>{
     
     try {
@@ -42,7 +57,6 @@ app.post('/api/v1/registerCustomer',async (req:Request,res:Response)=>{
 
 app.post('/api/v1/loginUser',async (req:Request,res:Response)=>{
     const user = await User.findOne({
-
         email:req.body.email,
         password:req.body.password
     })
