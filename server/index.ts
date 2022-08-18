@@ -42,10 +42,12 @@ app.post('/api/v1/registerCustomer',async (req:Request,res:Response)=>{
 
 app.post('/api/v1/loginUser',async (req:Request,res:Response)=>{
     const user = await User.findOne({
+
         email:req.body.email,
         password:req.body.password
     })
     // console.log(user)
+
     if(user){
         res.json({status:'ok', user:true, role:user?.role})
     }else{
@@ -55,10 +57,12 @@ app.post('/api/v1/loginUser',async (req:Request,res:Response)=>{
 
 app.post('/api/v1/loginCustomer',async (req:Request,res:Response)=>{
     const user = await Customer.findOne({
+
         email:req.body.email,
         password:req.body.password
     })
     // console.log(user)
+
     if(user){
         res.json({status:'ok', user:true})
     }else{
