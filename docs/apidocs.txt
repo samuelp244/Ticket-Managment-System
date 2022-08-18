@@ -1,31 +1,38 @@
-get-->
 
-signup(root-user) Post Req--->
+
+signup(root-user) Post Req---> http://localhost:1337/api/v1/registerRootUser
 {
     "username":"",
     "organization":"",
     "email":"",
     "password":""
 }
+success--> status:'ok'
+error--> status:'error'
 
-signup(cust) Post Req--->
+signup(cust) Post Req---> http://localhost:1337/api/v1/registerCustomer
 {
     "username":"",
     "email":"",
     "password":""
 }
+success--> status:'ok'
+error--> status:'error'
 
-login(root-user) Post Req--->
+login(root-user) Post Req---> http://localhost:1337/api/v1/loginUser
 {
     "username":"",
     "email":"",
     "password":""
 }
+success--> status:'ok', user:true, role:rootUser
+error--> status:'error', user:false
 
-login(cust) Post Req--->
+login(cust) Post Req---> http://localhost:1337/api/v1/loginCustomer
 {
     "username":"",
     "email":"",
     "password":""
 }
-
+success--> status:'ok', user:true. role:rootUser
+error--> status:'error', user:false
