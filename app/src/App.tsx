@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom"
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import LogIn from './components/forms/CustomerForms/LogInComm';
 import SignUp from './components/forms/CustomerForms/SignUpComm';
 import LogInOrg from './components/forms/RootUserForms/LogInOrg';
