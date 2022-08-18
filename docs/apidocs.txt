@@ -21,7 +21,6 @@ error--> status:'error'
 
 login(root-user) Post Req---> http://localhost:1337/api/v1/loginUser
 {
-    "username":"",
     "email":"",
     "password":""
 }
@@ -30,9 +29,9 @@ error--> status:'error', user:false
 
 login(cust) Post Req---> http://localhost:1337/api/v1/loginCustomer
 {
-    "username":"",
     "email":"",
     "password":""
 }
-success--> status:'ok', user:true. role:rootUser
+
+success--> status:'ok', user:true
 error--> status:'error', user:false
