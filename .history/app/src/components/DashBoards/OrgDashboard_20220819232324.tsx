@@ -44,7 +44,7 @@ const OrgDashboard = () => {
 
   return (
     <div>
-      {!addUser && <button onClick={startAdding} className="add-btn">Add User</button>}
+      {!addUser && <button onClick={startAdding} c>Add User</button>}
 
       {addUser && (
         <form onSubmit={submitHandler}>
