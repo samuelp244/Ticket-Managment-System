@@ -17,15 +17,5 @@
     display: flex;
     column-gap: 1rem;
     justify-content: center;
-    align-items: center;
-    
-}
-
-.nav-link{
-    text-decoration: none;
-    color: white;
-}
-
-.nav-link:hover{
-    text-decoration: underline;
+    ali
 }

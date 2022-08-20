@@ -1,0 +1,13 @@
+.main-page {
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.navbar{
+    background-color: #7FB5FF;
+    height: ;
+    width: 100%;
+}

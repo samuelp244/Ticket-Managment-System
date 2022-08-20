@@ -21,7 +21,7 @@ const LogInComm = () => {
         if (res.data.status === "ok" && res.data.user === true) {
           navigate("/commdashboard");
         } else {
-          alert("Login failed! check password");
+          alert("Login failed, cah");
         }
       } else {
         console.log("invalid");

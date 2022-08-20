@@ -12,13 +12,6 @@ const OrgDashboard = () => {
 
   const navigate = useNavigate();
 
-
-  const [addUser,setAddUser] = useState(false);
-
-
-
-
-
   const submitHandler = (e: any) => {
     e.preventDefault();
     Axios.post("http://localhost:1337/api/v1/registerUser", {
@@ -86,7 +79,7 @@ const OrgDashboard = () => {
             }}
           />
         </div>
-        <div className="form_controls">
+        <div className="form_contrls">
           <button>Cancel</button>
           <button type="submit">Add User</button>
         </div>

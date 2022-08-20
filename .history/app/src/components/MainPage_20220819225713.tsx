@@ -11,7 +11,7 @@ const MainPage = () => {
           <Link to='/orglogin' className="nav-link">Organization Login</Link>
         </div>
       </div>
-      <div className="content"></div>
+      div
       
 
       

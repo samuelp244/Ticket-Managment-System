@@ -8,10 +8,9 @@ const MainPage = () => {
       <div className="navbar">
         <div className="navlinks">
           <Link to='/login' className="nav-link">Community LogIn</Link>
-          <Link to='/orglogin' className="nav-link">Organization Login</Link>
+          <Link to='/orglogin' >Organization Login</Link>
         </div>
       </div>
-      <div className="content"></div>
       
 
       

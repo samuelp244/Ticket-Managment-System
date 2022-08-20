@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
-import './OrgDashBoard.css'
 
 const OrgDashboard = () => {
   const [userName, setUserName] = useState("");
@@ -11,13 +10,6 @@ const OrgDashboard = () => {
   const [confPassword, setConfPassword] = useState("");
 
   const navigate = useNavigate();
-
-
-  const [addUser,setAddUser] = useState(false);
-
-
-
-
 
   const submitHandler = (e: any) => {
     e.preventDefault();
@@ -86,7 +78,7 @@ const OrgDashboard = () => {
             }}
           />
         </div>
-        <div className="form_controls">
+        <div className="form_contrls">
           <button>Cancel</button>
           <button type="submit">Add User</button>
         </div>

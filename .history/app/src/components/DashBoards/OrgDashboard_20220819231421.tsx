@@ -13,11 +13,10 @@ const OrgDashboard = () => {
   const navigate = useNavigate();
 
 
-  const [addUser,setAddUser] = useState(false);
 
 
 
-
+  
 
   const submitHandler = (e: any) => {
     e.preventDefault();
