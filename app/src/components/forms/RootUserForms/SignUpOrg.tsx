@@ -24,7 +24,11 @@ const SignUpOrg = () => {
         console.log(res);
         if (res.statusText === "OK") {
           if (res.data.status === "ok") {
-            navigate("/orgdashboard");
+            navigate("/orgdashboard",{
+              state:{
+                organization:res.data.role
+              }
+            });
           }
         }
       });

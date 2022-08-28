@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import Axios from "axios";
 import "./OrgDashBoard.css";
 
@@ -11,6 +11,7 @@ const OrgDashboard = () => {
   const [confPassword, setConfPassword] = useState("");
 
   const navigate = useNavigate();
+  // const location = useLocation();
 
   const [addUser, setAddUser] = useState(false);
 
@@ -44,6 +45,8 @@ const OrgDashboard = () => {
 
   return (
     <div>
+      <h1>Organization Dashboard</h1>
+      {/* <h1>{location.state.organization}</h1> */}
       {!addUser && <button onClick={startAdding} className="add-btn">Add User</button>}
 
       {addUser && (

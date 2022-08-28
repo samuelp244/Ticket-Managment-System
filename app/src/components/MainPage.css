@@ -8,7 +8,7 @@
 
 .navbar{
     background-color: #7FB5FF;
-    height: 2rem;
+    height: max-content;
     width: 100%;
 }
 
@@ -22,6 +22,7 @@
 }
 
 .nav-link{
+    padding: 0.5rem;
     text-decoration: none;
     color: white;
 }

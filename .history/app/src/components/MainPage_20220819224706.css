@@ -1,8 +1,0 @@
-.main-page {
-    display: flex;
-    flex-direction:row;
-    justify-content: center;
-    column-gap: 3rem;
-    align-items: center;
-    text-decoration: wavy;
-}

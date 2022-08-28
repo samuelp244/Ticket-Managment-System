@@ -3,7 +3,8 @@ import React from 'react'
 const OrgUserDashBoard = () => {
   return (
     <div>
-      org user dash board
+      <h1>User DashBoard</h1>
+      tickets
     </div>
   )
 }
