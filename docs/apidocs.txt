@@ -51,7 +51,36 @@ error--> status:'error', user:false
 commDashBoard:
 
 get organization list
+get=>http://localhost:1337/api/v1/getOrganizationsList
+success--> {organizations:[]}
+error--> status:'error', error:""
 
 Post new ticket
+post=>http://localhost:1337/api/v1/addNewTicket
+{
+    "organizationName":"",
+    "category":"",
+    "username":"",
+    "query":""
+}
+success--> status:'ok'
+error--> status:'error', error:""
 
 get user tickets(userName)
+get=>http://localhost:1337/api/v1/getUserTickets?username=${}
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
+        }
+    ]
+}
+error--> status:'error', error:""
+
