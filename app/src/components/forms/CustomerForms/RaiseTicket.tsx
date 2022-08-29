@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-const RaiseTicket = () => {
+export interface orgNameProps{
+  orgName: string,
+}
+
+
+const RaiseTicket = (props:orgNameProps) => {
   // const [cat,setCat]=useState("Technical");
   const [query, setQuery] = useState("");
 
@@ -12,7 +17,7 @@ const RaiseTicket = () => {
 
   return (
     <form onSubmit={submitHandler}>
-      <h1>Company A Ticket Form</h1>
+      <h1>{props.orgName} Ticket Form</h1>
       <div className="details">
         <div>
           <label>select category: </label>

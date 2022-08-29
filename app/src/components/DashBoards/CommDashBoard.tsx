@@ -1,7 +1,15 @@
 import React,{ useState} from 'react'
 import RaiseTicket from '../forms/CustomerForms/RaiseTicket'
+import OrgList from '../others/OrgList'
 
 const CommDashBoard = () => {
+  const [selectedOrg,setSelectedOrg] = useState("");
+
+  const orgButtonHandler = (orgName:string) =>{
+    setSelectedOrg(orgName);
+  }
+
+  
 
   
 
@@ -12,12 +20,14 @@ const CommDashBoard = () => {
       <h1>Community DashBoard</h1>
       <div>
         Companies:
-        <ul>
+        {/* <ul>
           <button>Comp A</button>
           <br />
           <button>Comp B</button>
-          <RaiseTicket/>
-        </ul>
+          
+        </ul> */}
+        <OrgList orgButtonHandler={orgButtonHandler}/>
+        {selectedOrg !==""?<RaiseTicket orgName={selectedOrg}/>:null}
       </div>
       <div>
         tickets:

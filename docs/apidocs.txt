@@ -11,10 +11,11 @@ success--> status:'ok'
 error--> status:'error'
 
 
-signup(user) Post Req---> http://localhost:1337/api/v1/registerUser
+signup(employee) Post Req---> http://localhost:1337/api/v1/registerEmployee
 {
     "username":"",
-    "organization":"",
+    "rootUser":"",
+    "assignedDomain":"",
     "email":"",
     "password":""
 }
@@ -84,3 +85,4 @@ success->{
 }
 error--> status:'error', error:""
 
+re
