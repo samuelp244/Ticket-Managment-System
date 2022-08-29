@@ -1,12 +1,7 @@
-import React,{ useState} from 'react'
+import React,{ useS} from 'react'
 import RaiseTicket from '../forms/CustomerForms/RaiseTicket'
 
 const CommDashBoard = () => {
-
-  
-
-
-
   return (
     <div>
       <h1>Community DashBoard</h1>

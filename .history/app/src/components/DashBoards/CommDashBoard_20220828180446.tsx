@@ -1,22 +1,17 @@
-import React,{ useState} from 'react'
+import React from 'react'
 import RaiseTicket from '../forms/CustomerForms/RaiseTicket'
 
 const CommDashBoard = () => {
-
-  
-
-
-
   return (
     <div>
       <h1>Community DashBoard</h1>
       <div>
         Companies:
         <ul>
-          <button>Comp A</button>
-          <br />
-          <button>Comp B</button>
+          <li>A</li>
+          <li>B</li>
           <RaiseTicket/>
+          
         </ul>
       </div>
       <div>

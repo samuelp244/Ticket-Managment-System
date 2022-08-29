@@ -7,9 +7,7 @@ const MainPage = () => {
     <div className="main-page">
       <div className="navbar">
         <div className="navlinks">
-          <Link to='/' className="nav-link">Home</Link>
-          <Link to='/' className="nav-link">About</Link>
-          <Link to='/login' className="nav-link">Contact</Link>
+          <Link></Link>
           <Link to='/login' className="nav-link">Community LogIn</Link>
           <Link to='/orglogin' className="nav-link">Organization Login</Link>
         </div>
