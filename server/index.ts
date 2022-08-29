@@ -77,7 +77,7 @@ app.post('/api/v1/loginUser',async (req:Request,res:Response)=>{
     // console.log(user)
 
     if(user){
-        res.json({status:'ok', user:true, role:user?.role})
+        res.json({status:'ok', user:true, role:user?.role, username:user?.username})
     }else{
         res.json({status:'error', user:false})
     }
