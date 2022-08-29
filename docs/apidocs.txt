@@ -46,3 +46,12 @@ login(cust) Post Req---> http://localhost:1337/api/v1/loginCustomer
 
 success--> status:'ok', user:true
 error--> status:'error', user:false
+
+
+commDashBoard:
+
+get organization list
+
+Post new ticket
+
+get user tickets(userName)

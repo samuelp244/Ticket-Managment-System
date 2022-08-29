@@ -1,0 +1,34 @@
+users:[{
+	email:"",
+	role:"rootUser"|"customer"|"employee",
+	password:""	
+}],
+customers:[{
+	username:"",
+	email:"",
+	phone:""
+}],
+Organizations:
+[{
+	organizationName:"",
+	rootUser:{
+		username:"",
+		email:"",..
+		},
+	employees:[{
+		username:"",
+		email:"",
+		assignedDomain:"",
+		assignedTickets:"",
+	}],
+	
+}]
+tickets:[{
+    _id:"",
+    organizationName:"",
+    category:"",
+    userName:"",
+    query:"",
+    publishedAt:"",
+    status:"Active/Accepted/Closed",
+}]
