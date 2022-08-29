@@ -11,7 +11,7 @@ const Organization = new mongoose.Schema(
             username:{type: String, required: true},
             email:{type: String, required: true},
             assignedDomain:{type: String, required: true},
-            assignedTickets:{type: String, required: true}
+            assignedTickets:{type: String}
         }]
     },
     {collection:'organizations'}
