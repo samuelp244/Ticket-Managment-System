@@ -12,14 +12,18 @@ const LogInComm = () => {
   const submitHandler = (e: any) => {
     e.preventDefault();
 
-    Axios.post("http://localhost:1337/api/v1/loginCustomer", {
+    Axios.post("http://localhost:1337/api/v1/loginUser", {
       email: email,
       password: password,
     }).then((res) => {
       console.log(res);
       if (res.statusText === "OK") {
         if (res.data.status === "ok" && res.data.user === true) {
-          navigate("/commdashboard");
+          if(res.data.role === "customer"){navigate("/commdashboard",{
+            state:{
+              username:res.data.username,
+            }
+          })}
         } else {
           alert("Login failed! check password");
         }
@@ -34,7 +38,7 @@ const LogInComm = () => {
   return (
     <form onSubmit={submitHandler}>
       <div className="details">
-        <h1>Log In (Comm)</h1>
+        <h1>Log In (User)</h1>
         <input
           type="text"
           placeholder="Email"

@@ -1,15 +1,43 @@
-import React,{ useState} from 'react'
+import React,{ useState, useEffect} from 'react'
 import RaiseTicket from '../forms/CustomerForms/RaiseTicket'
 import OrgList from '../others/OrgList'
+import {useLocation } from 'react-router-dom'
+import Axios from 'axios'
+
+export interface locationState{
+  state:{
+    username:string,
+  }
+}
+
+export interface ticketstate{
+  category:string,
+  organizationName: string,
+  publishedAt: string,
+  query: string,
+  status: string,
+  username: string,
+  _id: string,
+}
+
 
 const CommDashBoard = () => {
   const [selectedOrg,setSelectedOrg] = useState("");
+  const [tickets,setTickets] = useState<ticketstate[]>();
 
   const orgButtonHandler = (orgName:string) =>{
     setSelectedOrg(orgName);
   }
 
-  
+  const location= useLocation() as locationState
+
+  useEffect(()=>{
+    Axios.get(`http://localhost:1337/api/v1/getUserTickets?username=${location.state.username}`).then((res)=>{
+      console.log(res);
+      setTickets(res.data.tickets)
+    })
+
+  },[location])
 
   
 
@@ -20,20 +48,22 @@ const CommDashBoard = () => {
       <h1>Community DashBoard</h1>
       <div>
         Companies:
-        {/* <ul>
-          <button>Comp A</button>
-          <br />
-          <button>Comp B</button>
-          
-        </ul> */}
         <OrgList orgButtonHandler={orgButtonHandler}/>
-        {selectedOrg !==""?<RaiseTicket orgName={selectedOrg}/>:null}
+        {selectedOrg !==""?<RaiseTicket orgName={selectedOrg} username={location.state.username}/>:null}
       </div>
       <div>
         tickets:
-        <ul>
-          <li>Raised tickets</li>
-          <li>Closed tickets</li>
+        <ul>{tickets?.filter(obj=>obj.status === "Active").map((val)=>
+          <div>{val.query}</div>
+        )}
+        </ul>
+        <ul>{tickets?.filter(obj=>obj.status === "Accepted").map((val)=>
+          <div>{val.query}</div>
+        )}
+        </ul>
+        <ul>{tickets?.filter(obj=>obj.status === "Closed").map((val)=>
+          <div>{val.query}</div>
+        )}
         </ul>
       </div>
       

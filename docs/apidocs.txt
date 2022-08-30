@@ -86,3 +86,7 @@ success->{
 error--> status:'error', error:""
 
 re
+
+get tickets of org using username(employee)(for employeeDashBoard)
+
+get employees of org using username(rootUser)(for rootUserDashboard)
