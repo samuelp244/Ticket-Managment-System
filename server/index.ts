@@ -102,22 +102,25 @@ app.get('/api/v1/getUserTickets',getUserTickets)
 
 app.post('/api/v1/addEmployee',async(req:Request,res:Response)=>{
     try{
-        await Organization.updateOne(
-            {"rootUser.username":req.body.rootUser},
-            {$push:{employees:{
+        if(req.body.rootUser){
+            await Organization.updateOne(
+                {"rootUser.username":req.body.rootUser},
+                {$push:{employees:{
+                    username:req.body.username,
+                    email:req.body.email,
+                    assignedDomain:req.body.assignedDomain
+                }}}
+            )
+    
+            await User.create({
                 username:req.body.username,
                 email:req.body.email,
-                assignedDomain:req.body.assignedDomain
-            }}}
-        )
-
-        await User.create({
-            username:req.body.username,
-            email:req.body.email,
-            role:"employee",
-            password:req.body.password
-        })
-        res.json({status:'ok'})
+                role:"employee",
+                password:req.body.password
+            })
+            res.json({status:'ok'})
+        }
+        
 
     }catch(err){
         console.log(err)
