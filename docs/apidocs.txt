@@ -88,5 +88,33 @@ error--> status:'error', error:""
 re
 
 get tickets of org using username(employee)(for employeeDashBoard)
+get=>http://localhost:1337/api/v1/getAllTickets?username=${} (employee username)
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
+        }
+    ]
+}
+error--> status:'error', error:""
 
 get employees of org using username(rootUser)(for rootUserDashboard)
+get=>http://localhost:1337/api/v1/getAllEmployees?username=${} (rootuser username)
+success->{
+    "employees": [
+        {
+            "username": "naruto",
+            "email": "n@leaf.com",
+            "assignedDomain": "technical",
+            "_id": "630c9e8e513d893dea440e7b"
+        }
+    ]
+}
+error--> status:'error', error:""

@@ -125,6 +125,26 @@ app.post('/api/v1/addEmployee',async(req:Request,res:Response)=>{
     }
 })
 
+app.get('/api/v1/getAllTickets',async(req:Request,res:Response)=>{
+    try{
+        const org = await Organization.findOne({"employees.username":req.query.username})
+        const data = await tickets.find({organizationName:org?.organizationName})
+        res.json({tickets:data})
+    }catch(err){
+        console.log(err)
+        res.json({status:'error',error:err})
+    }
+})
+
+app.get('/api/v1/getAllEmployees',async(req:Request,res:Response)=>{
+    try{
+        const org = await Organization.findOne({"rootUser.username":req.query.username});
+        res.json({employees:org?.employees})
+    }catch(err){
+        console.log(err)
+        res.json({status:'error',error:err})
+    }
+})
 
 app.listen(1337,()=>{
     console.log("app started at 1337")
