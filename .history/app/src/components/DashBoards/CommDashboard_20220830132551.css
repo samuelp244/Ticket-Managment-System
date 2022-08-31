@@ -1,0 +1,7 @@
+.ticket_div{
+    border: 1px solid rgb(28, 119, 255);
+    padding: 5px;
+    width: 10rem;
+    border-radius: 5px;
+    margin: 5px;
+}

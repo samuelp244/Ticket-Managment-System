@@ -1,0 +1,32 @@
+.form_controls{
+    display:flex;
+}
+
+.add-btn{
+    font-size: 1.5rem;
+    right:3rem;
+    width: 10rem;
+    height:3rem;
+}
+
+.add-btn:hover{
+    scale: 1.1;
+    transition:0.3s;
+}
+
+button:hover{
+    scale: 1.1;
+    transition:0.3s;
+}
+
+.employee-list{
+    border: 1px solid blue;
+    font-size: 1.;
+}
+
+.employee-list button{
+    margin: 5px;
+    padding: 1rem;
+    width: max-content;
+    height: max-content;
+}
