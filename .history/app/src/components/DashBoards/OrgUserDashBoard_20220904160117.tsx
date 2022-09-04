@@ -48,7 +48,7 @@ const OrgUserDashBoard = () => {
             <div className='ticket_div'>Company-{val.organizationName}<br/>
             Category-{val.category}<br/>
             query-{val.query}
-            <button>accept</button></div>
+            <button</div>
           )}
         </div>
 
@@ -57,8 +57,7 @@ const OrgUserDashBoard = () => {
           {tickets?.filter(obj=>obj.status === "Accepted").map((val)=>
             <div className='ticket_div'>Company-{val.organizationName}<br/>
             Category-{val.category}<br/>
-            query-{val.query}
-            <button>close</button></div>
+            query-{val.query}</div>
           )}
         </div>
 

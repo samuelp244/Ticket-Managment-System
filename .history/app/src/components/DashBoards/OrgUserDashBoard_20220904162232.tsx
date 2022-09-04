@@ -58,7 +58,7 @@ const OrgUserDashBoard = () => {
             <div className='ticket_div'>Company-{val.organizationName}<br/>
             Category-{val.category}<br/>
             query-{val.query}
-            <button>close</button></div>
+            <button</button></div>
           )}
         </div>
 

@@ -47,24 +47,22 @@ const OrgUserDashBoard = () => {
           {tickets?.filter(obj=>obj.status === "Active").map((val)=>
             <div className='ticket_div'>Company-{val.organizationName}<br/>
             Category-{val.category}<br/>
-            query-{val.query}
-            <button>accept</button></div>
+            query-{val.query}</div>
           )}
         </div>
 
         <div className="active_tickets">
-          Accept Tickets
-          {tickets?.filter(obj=>obj.status === "Accepted").map((val)=>
+          Active Tickets
+          {tickets?.filter(obj=>obj.status === "Active").map((val)=>
             <div className='ticket_div'>Company-{val.organizationName}<br/>
             Category-{val.category}<br/>
-            query-{val.query}
-            <button>close</button></div>
+            query-{val.query}</div>
           )}
         </div>
 
         <div className="active_tickets">
-          closed Tickets
-          {tickets?.filter(obj=>obj.status === "Closed").map((val)=>
+          Active Tickets
+          {tickets?.filter(obj=>obj.status === "Active").map((val)=>
             <div className='ticket_div'>Company-{val.organizationName}<br/>
             Category-{val.category}<br/>
             query-{val.query}</div>
@@ -72,7 +70,8 @@ const OrgUserDashBoard = () => {
         </div>
         
       </div>
-      
+      <div>Accepted Tickets</div>
+      <div>Closed Tickets</div>
     </div>
   )
 }
