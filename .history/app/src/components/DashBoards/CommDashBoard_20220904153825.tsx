@@ -72,8 +72,7 @@ const CommDashBoard = () => {
           <div>Company-{val.organizationName}<br/>
           Category-{val.category}<br/>
           query-{val.query}<br/>
-          status-{val.status}
-          <button>close</button></div>
+          status-{val.status}</div>
           )}
           </ul>
         </div>

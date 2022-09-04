@@ -73,7 +73,7 @@ const CommDashBoard = () => {
           Category-{val.category}<br/>
           query-{val.query}<br/>
           status-{val.status}
-          <button>close</button></div>
+          <button>close</button></div></div>
           )}
           </ul>
         </div>
