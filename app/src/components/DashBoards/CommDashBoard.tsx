@@ -48,33 +48,46 @@ const CommDashBoard = () => {
   return (
     <div>
       <h1>Community DashBoard</h1>
-      <div>
+      <div className='org-names-customer'>
         Companies:
         <OrgList orgButtonHandler={orgButtonHandler}/>
         {selectedOrg !==""?<RaiseTicket orgName={selectedOrg} username={location.state.username}/>:null}
       </div>
-      <div>
+
+      <div className="tickets_container">
         tickets:
-        <ul>{tickets?.filter(obj=>obj.status === "Active").map((val)=>
+        <div className="active_tickets">
+          <ul>{tickets?.filter(obj=>obj.status === "Active").map((val)=>
           <div className='ticket_div'>Company: {val.organizationName}<br/>
           Category: {val.category}<br/>
           query: {val.query}<br/>
-          status: {val.status}</div>
-        )}
-        </ul>
-        <ul>{tickets?.filter(obj=>obj.status === "Accepted").map((val)=>
+          status: {val.status}
+          <button>close</button></div>
+          )}
+          </ul>
+        </div>
+
+        <div className="accepted_tickets">
+          <ul>{tickets?.filter(obj=>obj.status === "Accepted").map((val)=>
           <div>Company-{val.organizationName}<br/>
           Category-{val.category}<br/>
           query-{val.query}<br/>
           status-{val.status}</div>
-        )}
-        </ul>
-        <ul>{tickets?.filter(obj=>obj.status === "Closed").map((val)=>
+          )}
+          </ul>
+        </div>
+
+        <div className="closed_tickets">
+          <ul>{tickets?.filter(obj=>obj.status === "Closed").map((val)=>
           <div>Company-{val.organizationName}<br/>
           Category-{val.category}<br/>
           query-{val.query}</div>
-        )}
-        </ul>
+          )}
+          </ul>
+        </div>
+        
+        
+        
       </div>
       
     </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import './OrgList.css'
 
 export interface orgListProps {
   orgButtonHandler: (orgName: string) => void;
@@ -20,7 +21,7 @@ const OrgList = (props: orgListProps) => {
   return (
     <>
       {orgList?.map((org) => (
-        <div key={org}>
+        <div key={org} className="org-list">
           <button onClick={() => {
             props.orgButtonHandler(org);
           }}>{org}</button>
