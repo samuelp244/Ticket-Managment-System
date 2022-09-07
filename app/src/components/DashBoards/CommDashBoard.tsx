@@ -39,7 +39,7 @@ const CommDashBoard = () => {
       setTickets(res.data.tickets)
     })
 
-  },[location,orgButtonHandler])
+  },[location,selectedOrg])
 
   
 

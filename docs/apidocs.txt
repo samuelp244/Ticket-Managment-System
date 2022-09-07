@@ -11,7 +11,7 @@ success--> status:'ok'
 error--> status:'error'
 
 
-signup(employee) Post Req---> http://localhost:1337/api/v1/registerEmployee
+signup(employee) Post Req---> http://localhost:1337/api/v1/addEmployee
 {
     "username":"",
     "rootUser":"",
@@ -114,6 +114,42 @@ success->{
             "email": "n@leaf.com",
             "assignedDomain": "technical",
             "_id": "630c9e8e513d893dea440e7b"
+        }
+    ]
+}
+error--> status:'error', error:""
+
+close ticket from customer side
+get=>http://localhost:1337/api/v1/closeCustomerTicket?id=${} (rootuser username)
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
+        }
+    ]
+}
+error--> status:'error', error:""
+
+accept ticket from employee side
+get=>http://localhost:1337/api/v1/acceptTicket?id=${}&username=${} (employee username)
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
         }
     ]
 }
