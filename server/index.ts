@@ -184,6 +184,36 @@ app.get('/api/v1/acceptTicket',async(req:Request,res:Response)=>{
     }
 })
 
+app.get('/api/v1/closeTicketEmployee',async(req:Request,res:Response)=>{
+    try{
+        await tickets.findOneAndUpdate(
+            {_id:req.query.id},
+            {status:"closed"}
+        )
+        await Organization.findOneAndUpdate(
+            {"employees.username":req.query.username},
+            {$set:{"employees.$.assignedTickets":null}}
+        )
+        const org = await Organization.findOne({"employees.username":req.query.username})
+        const data = await tickets.find({organizationName:org?.organizationName})
+        res.json({tickets:data})
+    }catch(err){
+        console.log(err)
+        res.json({status:'error',error:err})
+    }
+})
+
+app.get('/api/v1/getAllOrgTickets',async(req:Request,res:Response)=>{
+    try{
+        const org = await Organization.findOne({"rootUser.username":req.query.username})
+        const data = await tickets.find({organizationName:org?.organizationName})
+        res.json({tickets:data})
+    }catch(err){
+        console.log(err)
+        res.json({status:'error',error:err})
+    }
+})
+
 app.listen(1337,()=>{
     console.log("app started at 1337")
 });

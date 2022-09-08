@@ -154,3 +154,39 @@ success->{
     ]
 }
 error--> status:'error', error:""
+
+close ticket from employee side
+get=>http://localhost:1337/api/v1/closeTicketEmployee?id=${}&username=${} (employee username)
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
+        }
+    ]
+}
+error--> status:'error', error:""
+
+get=>http://localhost:1337/api/v1/getAllOrgTickets?username=${} (rootUser username)
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
+        }
+    ]
+}
+error--> status:'error', error:""
+
