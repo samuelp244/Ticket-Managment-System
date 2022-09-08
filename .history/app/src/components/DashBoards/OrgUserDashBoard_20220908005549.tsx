@@ -38,9 +38,7 @@ const OrgUserDashBoard = () => {
   },[location])
 
   const acceptHandler = (id: string) =>{
-    Axios.get(`http://localhost:1337/api/v1/acceptTicket?id=${id}&username=${location.state.username}`).then((res)=>{
-      setTickets(res.data.tickets)
-    })
+    Axios.get(`http://localhost:1337/api/v1/acceptTicket?id=${id}&username=${location.state.username}`).then()
   }
 
   return (

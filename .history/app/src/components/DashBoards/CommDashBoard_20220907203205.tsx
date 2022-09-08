@@ -46,7 +46,6 @@ const CommDashBoard = () => {
   const closeButtonHandler = (id:string) => {
     Axios.get(`http://localhost:1337/api/v1/closeCustomerTicket?id=${id}`).then((res)=>{
       console.log(res.data);
-      setTickets(res.data.tickets)
     })
   }
 

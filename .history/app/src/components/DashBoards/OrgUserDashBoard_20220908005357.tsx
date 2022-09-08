@@ -38,9 +38,7 @@ const OrgUserDashBoard = () => {
   },[location])
 
   const acceptHandler = (id: string) =>{
-    Axios.get(`http://localhost:1337/api/v1/acceptTicket?id=${id}&username=${location.state.username}`).then((res)=>{
-      setTickets(res.data.tickets)
-    })
+    Axios.get(`http://localhost:1337/api/v1/acceptTicket?id=${}&username=${location.state.username}`)
   }
 
   return (
@@ -54,7 +52,7 @@ const OrgUserDashBoard = () => {
             <div className='ticket_div'>Company-{val.organizationName}<br/>
             Category-{val.category}<br/>
             query-{val.query}
-            <button onClick={()=>acceptHandler(val._id)}>accept</button></div>
+            <button onClick={()=>acceptHandler(val._id)>accept</button></div>
           )}
         </div>
 
