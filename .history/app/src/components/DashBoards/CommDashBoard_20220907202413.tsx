@@ -37,7 +37,7 @@ const CommDashBoard = () => {
 
   useEffect(()=>{
     Axios.get(`http://localhost:1337/api/v1/getUserTickets?username=${location.state.username}`).then((res)=>{
-      
+      console.log(res);
       setTickets(res.data.tickets)
     })
 
@@ -45,8 +45,7 @@ const CommDashBoard = () => {
 
   const closeButtonHandler = (id:string) => {
     Axios.get(`http://localhost:1337/api/v1/closeCustomerTicket?id=${id}`).then((res)=>{
-      console.log(res.data);
-      setTickets(res.data.tickets)
+      console.log(res);
     })
   }
 
@@ -86,7 +85,7 @@ const CommDashBoard = () => {
         </div>
 
         <div className="closed_tickets">
-          <ul>{tickets?.filter(obj=>obj.status === "closed").map((val)=>
+          <ul>{tickets?.filter(obj=>obj.status === "Closed").map((val)=>
           <div>Company-{val.organizationName}<br/>
           Category-{val.category}<br/>
           query-{val.query}</div>
