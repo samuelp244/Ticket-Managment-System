@@ -43,11 +43,7 @@ const OrgUserDashBoard = () => {
     })
   }
 
-  const closeHandler=(id: string)=>{
-    Axios.get(`http://localhost:1337/api/v1/closeTicketEmployee?id=${id}&username=${location.state.username}`).then((res)=>{
-      setTickets(res.data.tickets)
-  })
-  }
+  const 
 
   return (
     <div>
@@ -76,7 +72,7 @@ const OrgUserDashBoard = () => {
 
         <div className="active_tickets">
           closed Tickets
-          {tickets?.filter(obj=>obj.status === "closed").map((val)=>
+          {tickets?.filter(obj=>obj.status === "Closed").map((val)=>
             <div className='ticket_div'>Company-{val.organizationName}<br/>
             Category-{val.category}<br/>
             query-{val.query}</div>
