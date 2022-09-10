@@ -3,8 +3,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import User from './models/user.model'
 import Customer from './models/customer.model'
-import Organization from './models/organizations.model'
+import rootUsers from "./models/rootUsers.model"
 import tickets from './models/tickets.model'
+import employees from "./models/employees.model"
 import { getUserTickets } from './Requests/customer';
 const app = express();
 app.use(express.json());
@@ -20,13 +21,10 @@ app.post('/api/v1/registerRootUser',async (req:Request,res:Response)=>{
             email: req.body.email,
             password: req.body.password
         })
-        await Organization.create({
+        await rootUsers.create({
             organizationName:req.body.organization,
-            rootUser:{
-                username:req.body.username,
-                email: req.body.email
-            },
-            employees:[]
+            username:req.body.username,
+            email: req.body.email
         })
         res.json({status:'ok'})
     } catch (err){
@@ -72,7 +70,7 @@ app.post('/api/v1/loginUser',async (req:Request,res:Response)=>{
 
 app.get('/api/v1/getOrganizationsList',async (req:Request,res:Response)=>{
     try{
-        const data = await Organization.find();
+        const data = await rootUsers.find();
         const orgNames = data.map(i=>i.organizationName);
         res.json({organizations:orgNames});
     }catch(err){
@@ -103,16 +101,14 @@ app.get('/api/v1/getUserTickets',getUserTickets)
 app.post('/api/v1/addEmployee',async(req:Request,res:Response)=>{
     try{
         if(req.body.rootUser){
-            await Organization.updateOne(
-                {"rootUser.username":req.body.rootUser},
-                {$push:{employees:{
-                    username:req.body.username,
-                    email:req.body.email,
-                    assignedDomain:req.body.assignedDomain,
-                    assignedTickets:{}
-                }}}
-            )
-    
+            const rootuser = await rootUsers.findOne({username:req.body.rootUser});
+            await employees.create({
+                username:req.body.username,
+                organizationName:rootuser?.organizationName,
+                email:req.body.email,
+                assignedDomain:req.body.assignedDomain,
+                assignedTickets:null
+            })
             await User.create({
                 username:req.body.username,
                 email:req.body.email,
@@ -121,17 +117,16 @@ app.post('/api/v1/addEmployee',async(req:Request,res:Response)=>{
             })
             res.json({status:'ok'})
         }
-        
-
     }catch(err){
         console.log(err)
         res.json({status:'error',error:err})
     }
 })
 
+
 app.get('/api/v1/getAllTickets',async(req:Request,res:Response)=>{
     try{
-        const org = await Organization.findOne({"employees.username":req.query.username})
+        const org = await employees.findOne({"username":req.query.username})
         const data = await tickets.find({organizationName:org?.organizationName})
         res.json({tickets:data})
     }catch(err){
@@ -142,8 +137,11 @@ app.get('/api/v1/getAllTickets',async(req:Request,res:Response)=>{
 
 app.get('/api/v1/getAllEmployees',async(req:Request,res:Response)=>{
     try{
-        const org = await Organization.findOne({"rootUser.username":req.query.username});
-        res.json({employees:org?.employees})
+        if(req.body.rootUser){
+            const rootuser = await rootUsers.findOne({username:req.body.rootUser});
+            const employeeData = await employees.find({organizationName:rootuser?.organizationName});
+            res.json({employees:employeeData})
+        }
     }catch(err){
         console.log(err)
         res.json({status:'error',error:err})
@@ -171,11 +169,11 @@ app.get('/api/v1/acceptTicket',async(req:Request,res:Response)=>{
             {_id:req.query.id},
             {status:"Accepted"}
         )
-        await Organization.findOneAndUpdate(
-            {"employees.username":req.query.username},
-            {$set:{"employees.$.assignedTickets":req.query.id}}
+        await employees.findOneAndUpdate(
+            {"username":req.query.username},
+            {$set:{"assignedTickets":req.query.id}}
         )
-        const org = await Organization.findOne({"employees.username":req.query.username})
+        const org = await employees.findOne({"username":req.query.username})
         const data = await tickets.find({organizationName:org?.organizationName})
         res.json({tickets:data})
     }catch(err){
@@ -190,11 +188,11 @@ app.get('/api/v1/closeTicketEmployee',async(req:Request,res:Response)=>{
             {_id:req.query.id},
             {status:"closed"}
         )
-        await Organization.findOneAndUpdate(
-            {"employees.username":req.query.username},
-            {$set:{"employees.$.assignedTickets":null}}
+        await employees.findOneAndUpdate(
+            {"username":req.query.username},
+            {$set:{"assignedTickets":null}}
         )
-        const org = await Organization.findOne({"employees.username":req.query.username})
+        const org = await employees.findOne({"username":req.query.username})
         const data = await tickets.find({organizationName:org?.organizationName})
         res.json({tickets:data})
     }catch(err){
@@ -205,9 +203,49 @@ app.get('/api/v1/closeTicketEmployee',async(req:Request,res:Response)=>{
 
 app.get('/api/v1/getAllOrgTickets',async(req:Request,res:Response)=>{
     try{
-        const org = await Organization.findOne({"rootUser.username":req.query.username})
+        const org = await rootUsers.findOne({"username":req.query.username})
         const data = await tickets.find({organizationName:org?.organizationName})
         res.json({tickets:data})
+    }catch(err){
+        console.log(err)
+        res.json({status:'error',error:err})
+    }
+})
+
+app.put('/api/v1/editEmployee', async(req:Request,res:Response)=>{
+    // console.log(req.body)
+    try{
+        await employees.findByIdAndUpdate(req.body._id,{
+            username:req.body.username,
+            organizationName:req.body.organizationName,
+            email:req.body.email,
+            assignedDomain:req.body.assignedDomain,
+            assignedTickets:req.body.assignedTickets
+            });
+        await User.findOneAndUpdate(
+            {email:req.body.email},
+            {username:req.body.username}
+            )
+        res.json({status:'ok'});
+    }catch(err){
+        console.log(err)
+        res.json({status:'error',error:err})
+    }
+})
+
+app.put('/api/v1/editCustomer', async(req:Request,res:Response)=>{
+    // console.log(req.body)
+    try{
+        await Customer.findByIdAndUpdate(req.body._id,{
+            username: req.body.username,
+            email: req.body.email,
+            phone: req.body.phone
+            });
+        await User.findOneAndUpdate(
+            {email:req.body.email},
+            {username:req.body.username}
+            )
+        res.json({status:'ok'});
     }catch(err){
         console.log(err)
         res.json({status:'error',error:err})
