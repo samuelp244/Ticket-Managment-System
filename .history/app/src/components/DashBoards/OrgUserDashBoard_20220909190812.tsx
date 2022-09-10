@@ -76,7 +76,7 @@ const OrgUserDashBoard = () => {
 
         <div className="active_tickets">
           closed Tickets
-          {tickets?.filter(obj=>obj.status === "closed").map((val)=>
+          {tickets?.filter(obj=>obj.status === "Closed").map((val)=>
             <div className='ticket_div'>Company-{val.organizationName}<br/>
             Category-{val.category}<br/>
             query-{val.query}</div>
