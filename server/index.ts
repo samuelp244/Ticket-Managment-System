@@ -137,8 +137,8 @@ app.get('/api/v1/getAllTickets',async(req:Request,res:Response)=>{
 
 app.get('/api/v1/getAllEmployees',async(req:Request,res:Response)=>{
     try{
-        if(req.body.rootUser){
-            const rootuser = await rootUsers.findOne({username:req.body.rootUser});
+        if(req.query.username){
+            const rootuser = await rootUsers.findOne({username:req.query.username});
             const employeeData = await employees.find({organizationName:rootuser?.organizationName});
             res.json({employees:employeeData})
         }
