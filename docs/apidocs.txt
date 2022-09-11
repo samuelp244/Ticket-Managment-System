@@ -26,7 +26,8 @@ signup(cust) Post Req---> http://localhost:1337/api/v1/registerCustomer
 {
     "username":"",
     "email":"",
-    "password":""
+    "password":"",
+    "phone":""
 }
 success--> status:'ok'
 error--> status:'error'
@@ -113,6 +114,8 @@ success->{
             "username": "naruto",
             "email": "n@leaf.com",
             "assignedDomain": "technical",
+            "assignedTickets":"",
+            "organizationName":"",
             "_id": "630c9e8e513d893dea440e7b"
         }
     ]
@@ -190,3 +193,31 @@ success->{
 }
 error--> status:'error', error:""
 
+put=>http://localhost:1337/api/v1/api/v1/editEmployee
+
+{
+        "username": "naruto",   //fixed
+        "email": "n@leaf.com",
+        "assignedDomain": "technical",
+        "assignedTickets":"",
+        "organizationName":"",
+        "_id": "630c9e8e513d893dea440e7b"
+}
+
+success->{
+    "status":"ok"
+}
+error--> status:'error', error:""
+
+put=>http://localhost:1337/api/v1/api/v1/editCustomer
+
+{
+        "username": "naruto",   //fixed
+        "email": "n@leaf.com",
+        "phone":""
+}
+
+success->{
+    "status":"ok"
+}
+error--> status:'error', error:""

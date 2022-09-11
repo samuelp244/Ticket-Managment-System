@@ -223,8 +223,8 @@ app.put('/api/v1/editEmployee', async(req:Request,res:Response)=>{
             assignedTickets:req.body.assignedTickets
             });
         await User.findOneAndUpdate(
-            {email:req.body.email},
-            {username:req.body.username}
+            {username:req.body.username},
+            {email:req.body.email}
             )
         res.json({status:'ok'});
     }catch(err){
@@ -236,14 +236,15 @@ app.put('/api/v1/editEmployee', async(req:Request,res:Response)=>{
 app.put('/api/v1/editCustomer', async(req:Request,res:Response)=>{
     // console.log(req.body)
     try{
-        await Customer.findByIdAndUpdate(req.body._id,{
-            username: req.body.username,
-            email: req.body.email,
-            phone: req.body.phone
+        await Customer.findOneAndUpdate(
+            {username:req.body.username},
+            {
+                email: req.body.email,
+                phone: req.body.phone
             });
         await User.findOneAndUpdate(
-            {email:req.body.email},
-            {username:req.body.username}
+            {username:req.body.username},
+            {email:req.body.email}
             )
         res.json({status:'ok'});
     }catch(err){
