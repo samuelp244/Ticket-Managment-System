@@ -21,7 +21,7 @@ const OrgList = (props: orgListProps) => {
   return (
     <>
 
-      
+      {orgList}
       {orgList?.map((org) => (
         <div key={org} className="org-list">
           <button onClick={() => {

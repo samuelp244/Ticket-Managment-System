@@ -52,7 +52,7 @@ const CommDashBoard = () => {
   return (
     <div>
       <h1>Community DashBoard</h1>
-      <h4>UserName: {location.state.username}</h4>
+      <h4>{location.state.username}</h3>
       <div className="org-names-customer">
         <h3>Companies:</h3>
         <OrgList orgButtonHandler={orgButtonHandler} />
