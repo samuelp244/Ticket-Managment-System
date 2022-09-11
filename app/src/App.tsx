@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom"
 import CommDashBoard from './components/DashBoards/CommDashBoard';
 import OrgDashboard from './components/DashBoards/OrgDashboard';
+import OrgUserDashBoard from './components/DashBoards/OrgUserDashBoard'
 // import Footer from './components/Footer';
 import LogIn from './components/forms/CustomerForms/LogInComm';
 import SignUp from './components/forms/CustomerForms/SignUpComm';
@@ -22,6 +23,7 @@ function App() {
           <Route path="/orgsignup" element={<SignUpOrg/>}></Route>
           <Route path="/commdashboard" element={<CommDashBoard/>}></Route>
           <Route path="/orgdashboard" element={<OrgDashboard/>}></Route>
+          <Route path="/orguserdb" element={<OrgUserDashBoard/>}></Route>
         </Routes>
       </Router>
       {/* <MainPage/>

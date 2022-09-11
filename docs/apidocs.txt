@@ -11,10 +11,11 @@ success--> status:'ok'
 error--> status:'error'
 
 
-signup(user) Post Req---> http://localhost:1337/api/v1/registerUser
+signup(employee) Post Req---> http://localhost:1337/api/v1/addEmployee
 {
     "username":"",
-    "organization":"",
+    "rootUser":"",
+    "assignedDomain":"",
     "email":"",
     "password":""
 }
@@ -25,7 +26,8 @@ signup(cust) Post Req---> http://localhost:1337/api/v1/registerCustomer
 {
     "username":"",
     "email":"",
-    "password":""
+    "password":"",
+    "phone":""
 }
 success--> status:'ok'
 error--> status:'error'
@@ -46,3 +48,176 @@ login(cust) Post Req---> http://localhost:1337/api/v1/loginCustomer
 
 success--> status:'ok', user:true
 error--> status:'error', user:false
+
+
+commDashBoard:
+
+get organization list
+get=>http://localhost:1337/api/v1/getOrganizationsList
+success--> {organizations:[]}
+error--> status:'error', error:""
+
+Post new ticket
+post=>http://localhost:1337/api/v1/addNewTicket
+{
+    "organizationName":"",
+    "category":"",
+    "username":"",
+    "query":""
+}
+success--> status:'ok'
+error--> status:'error', error:""
+
+get user tickets(userName)
+get=>http://localhost:1337/api/v1/getUserTickets?username=${}
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
+        }
+    ]
+}
+error--> status:'error', error:""
+
+re
+
+get tickets of org using username(employee)(for employeeDashBoard)
+get=>http://localhost:1337/api/v1/getAllTickets?username=${} (employee username)
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
+        }
+    ]
+}
+error--> status:'error', error:""
+
+get employees of org using username(rootUser)(for rootUserDashboard)
+get=>http://localhost:1337/api/v1/getAllEmployees?username=${} (rootuser username)
+success->{
+    "employees": [
+        {
+            "username": "naruto",
+            "email": "n@leaf.com",
+            "assignedDomain": "technical",
+            "assignedTickets":"",
+            "organizationName":"",
+            "_id": "630c9e8e513d893dea440e7b"
+        }
+    ]
+}
+error--> status:'error', error:""
+
+close ticket from customer side
+get=>http://localhost:1337/api/v1/closeCustomerTicket?id=${} (rootuser username)
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
+        }
+    ]
+}
+error--> status:'error', error:""
+
+accept ticket from employee side
+get=>http://localhost:1337/api/v1/acceptTicket?id=${}&username=${} (employee username)
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
+        }
+    ]
+}
+error--> status:'error', error:""
+
+close ticket from employee side
+get=>http://localhost:1337/api/v1/closeTicketEmployee?id=${}&username=${} (employee username)
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
+        }
+    ]
+}
+error--> status:'error', error:""
+
+get=>http://localhost:1337/api/v1/getAllOrgTickets?username=${} (rootUser username)
+success->{
+    "tickets": [
+        {
+            "_id": "",
+            "organizationName": "",
+            "category": "",
+            "username": "",
+            "query": "",
+            "publishedAt": "2022-08-28T18:04:11.476Z",
+            "status": "Active",
+            "__v": 0
+        }
+    ]
+}
+error--> status:'error', error:""
+
+put=>http://localhost:1337/api/v1/api/v1/editEmployee
+
+{
+        "username": "naruto",   //fixed
+        "email": "n@leaf.com",
+        "assignedDomain": "technical",
+        "assignedTickets":"",
+        "organizationName":"",
+        "_id": "630c9e8e513d893dea440e7b"
+}
+
+success->{
+    "status":"ok"
+}
+error--> status:'error', error:""
+
+put=>http://localhost:1337/api/v1/api/v1/editCustomer
+
+{
+        "username": "naruto",   //fixed
+        "email": "n@leaf.com",
+        "phone":""
+}
+
+success->{
+    "status":"ok"
+}
+error--> status:'error', error:""

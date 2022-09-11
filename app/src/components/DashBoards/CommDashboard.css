@@ -1,0 +1,49 @@
+.ticket_div{
+    border: 1px solid rgb(28, 119, 255);
+    
+    border-radius: 5px;
+    
+}
+
+.org-names-customer button{
+    width:10rem;
+    height: 6rem;
+    margin: 5px;
+    font-size: 2rem;
+    text-align: center;
+    
+    
+}
+
+.tickets_container{
+    background-color: rgb(219, 219, 219);
+    margin: 5px;
+    border-radius: 8px;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.active_tickets{
+    background-color:white;
+    width:25%;
+    margin:2px;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.accepted_tickets{
+    background-color:white;
+    width:25%;
+    margin:2px;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.closed_tickets{
+    background-color:white;
+    width:25%;
+    margin:2px;
+    padding: 1rem;
+    border-radius: 8px;
+}
