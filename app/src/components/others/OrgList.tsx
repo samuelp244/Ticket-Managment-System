@@ -20,15 +20,14 @@ const OrgList = (props: orgListProps) => {
 
   return (
     <>
-
-      
-      {orgList?.map((org) => (
+    
+      {orgList?.length!==0?orgList?.map((org) => (
         <div key={org} className="org-list">
           <button onClick={() => {
             props.orgButtonHandler(org);
           }}>{org}</button>
         </div>
-      ))}
+      )):<p>none found</p>}
     </>
   );
 };

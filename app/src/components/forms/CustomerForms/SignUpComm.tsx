@@ -6,6 +6,7 @@ import Axios from "axios";
 const SignUpComm = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
 
@@ -18,6 +19,7 @@ const SignUpComm = () => {
       Axios.post("http://localhost:1337/api/v1/registerCustomer", {
         username: userName,
         email: email,
+        phone: phone,
         password: password,
       }).then((res) => {
         console.log(res);
@@ -30,6 +32,7 @@ const SignUpComm = () => {
 
       setUserName("");
       setEmail("");
+      setPhone("");
       setPassword("");
       setConfPassword("");
     } else {
@@ -59,6 +62,9 @@ const SignUpComm = () => {
             setEmail(e.target.value);
           }}
         />
+        <input type="text" placeholder="Enter your mobile number" required value={phone} onChange={(e: any) => {
+          setPhone(e.target.value);
+        }}/>
         <input
           type="password"
           placeholder="Password"
