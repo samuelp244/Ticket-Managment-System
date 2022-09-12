@@ -61,7 +61,19 @@ app.post('/api/v1/loginUser',async (req:Request,res:Response)=>{
     // console.log(user)
 
     if(user){
-        res.json({status:'ok', user:true, role:user?.role, username:user?.username})
+        if(user.role==="employee"){
+            const tempEmployee = await employees.findOne({username:user.username});
+            res.json({
+                status:'ok', 
+                user:true, 
+                role:user?.role, 
+                username:user?.username,
+                assignedDomain:tempEmployee?.assignedDomain
+            })
+        }else{
+            res.json({status:'ok', user:true, role:user?.role, username:user?.username})
+        }
+        
     }else{
         res.json({status:'error', user:false})
     }
