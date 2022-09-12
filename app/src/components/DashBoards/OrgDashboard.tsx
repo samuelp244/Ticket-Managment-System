@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate,useLocation} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation} from "react-router-dom";
 import Axios from "axios";
 import "./OrgDashBoard.css";
+import {CgProfile} from "react-icons/cg"
+import {AiOutlineSetting} from "react-icons/ai"
 
 
 export interface locationState{
@@ -17,6 +19,15 @@ export interface empListType{
   _id: string
 }
 
+export interface ticketstate{
+  category:string,
+  organizationName: string,
+  publishedAt: string,
+  query: string,
+  status: string,
+  username: string,
+  _id: string,
+}
 
 const OrgDashboard = () => {
   const [userName, setUserName] = useState("");
@@ -25,7 +36,9 @@ const OrgDashboard = () => {
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
 
-  const navigate = useNavigate();
+  const [tickets,setTickets] = useState<ticketstate[]>();
+
+ 
   const location = useLocation() as locationState;
  
 
@@ -41,7 +54,6 @@ const OrgDashboard = () => {
 
   const submitHandler = (e: any) => {
     e.preventDefault();
-    console.log(dom);
     Axios.post("http://localhost:1337/api/v1/addEmployee", {
       username: userName,
       rootUser: location.state.username,
@@ -66,24 +78,52 @@ const OrgDashboard = () => {
     setConfPassword("");
   };
 
+
   const getEmployees = (e:any) =>{
     e.preventDefault();
     Axios.get(`http://localhost:1337/api/v1/getAllEmployees?username=${location.state.username}`).then((res)=>{
       console.log(res);
+      // setEmpList(res.data.employees);
+    })
+  }
+  
+
+  useEffect(()=>{
+    Axios.get(`http://localhost:1337/api/v1/getAllEmployees?username=${location.state.username}`).then((res)=>{
+      console.log(res);
       setEmpList(res.data.employees);
     })
+  },[location])
 
-  }
+  useEffect(()=>{
+    Axios.get(`http://localhost:1337/api/v1/getAllOrgTickets?username=${location.state.username}`).then((res)=>{
+      console.log(res);
+      setTickets(res.data.tickets)
+    })
+  },[location])
+
+
+  
 
   return (
     <div>
-      <h1>Organization Dashboard</h1>
-      {/* <h1>{location.state.organization}</h1> */}
-      {!addUser && <button onClick={startAdding} className="add-btn">Add User</button>}
+      <header className="orgdash_header">
+        <h1>Organization Dashboard</h1>
+        <h2><CgProfile/>  {location.state.username}</h2>
+      </header>
+      
+      
+      
+      <div className="features">
+        {!addUser && <button onClick={startAdding} className="add-btn">Add Technician(employee)</button>}
+
+      </div>
+      
+      
 
       {addUser && (
         <form onSubmit={submitHandler}>
-          <h1>Add User</h1>
+          <h1>Assign emp</h1>
           <div className="details">
             <input
               type="text"
@@ -131,11 +171,87 @@ const OrgDashboard = () => {
           </div>
         </form>
       )}
-      <div className="employee-list"><button onClick={getEmployees}>employee list</button>
-      {empList?.map((val)=>{
-        return (<div>employee name: {val.username}<br/>
-        domain: {val.assignedDomain}</div>)
-      })}
+      <hr />
+      
+   
+      <div className="employee-container">
+        <div className="employee_header">
+          <h4>Employee List</h4>
+          <div className="employee_count">{empList?.length}</div> 
+        </div>
+        
+        <hr />
+        <div className="employee-list">
+          {empList?.map((val)=>
+          <div className="employee_card" key={val._id}>
+            <div className="employee_details">
+              employee Name: {val.username}
+              <br />
+              Domain: {val.assignedDomain}
+            </div>
+            <div className="employee_buttons">
+              <button><AiOutlineSetting/></button>
+            </div>
+            
+          </div>
+          )}
+        </div>
+        
+
+      </div>
+      <hr />
+
+
+      <h2>Tickets:</h2>
+      <div className='tickets_container'>
+        
+        <div className="active_tickets">
+          <div className="ticket_header">
+            <div>Active Tickets</div>
+            <div className="ticket_count">
+              {tickets?.filter((obj) => obj.status === "Active").length}
+            </div>
+          </div>
+          <hr />
+          {tickets?.filter(obj=>obj.status === "Active").length !== 0?tickets?.filter(obj=>obj.status === "Active").map((val)=>
+            <div className='ticket_div' key={val._id}>Company-{val.organizationName}<br/>
+            Category-{val.category}<br/>
+            query-{val.query}
+            </div>
+          ):<p>none found</p>}
+        </div>
+
+        <div className="active_tickets">
+          <div className="ticket_header">
+            <div>Accepted Tickets</div>
+            <div className="ticket_count">
+              {tickets?.filter((obj) => obj.status === "Accepted").length}
+            </div>
+          </div>
+          <hr />
+          {tickets?.filter(obj=>obj.status === "Accepted").length!==0?tickets?.filter(obj=>obj.status === "Accepted").map((val)=>
+            <div className='ticket_div' key={val._id}>Company-{val.organizationName}<br/>
+            Category-{val.category}<br/>
+            query-{val.query}
+            </div>
+          ):<p>none found</p>}
+        </div>
+
+        <div className="active_tickets">
+          <div className="ticket_header">
+            <div>Closed Tickets</div>
+            <div className="ticket_count">
+              {tickets?.filter((obj) => obj.status === "closed").length}
+            </div>
+          </div>
+          <hr/>
+          {tickets?.filter(obj=>obj.status === "closed").length!==0?tickets?.filter(obj=>obj.status === "closed").map((val)=>
+            <div className='ticket_div' key={val._id}>Company-{val.organizationName}<br/>
+            Category-{val.category}<br/>
+            query-{val.query}</div>
+          ):<p>none found</p>}
+        </div>
+        
       </div>
     </div>
   );
