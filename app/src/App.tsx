@@ -9,6 +9,8 @@ import SignUp from './components/forms/CustomerForms/SignUpComm';
 import LogInOrg from './components/forms/RootUserForms/LogInOrg';
 import SignUpOrg from './components/forms/RootUserForms/SignUpOrg';
 import MainPage from './components/MainPage';
+import About from './components/About';
+import Contact from './components/Contact';
 
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<MainPage/>}></Route>
+          <Route path="/about" element={<About/>}></Route>
+          <Route path="/contact" element={<Contact/>}></Route>
           <Route path="/signup" element={<SignUp/>}></Route>
           <Route path="/login" element={<LogIn/>}></Route>
           <Route path="/orglogin" element={<LogInOrg/>}></Route>

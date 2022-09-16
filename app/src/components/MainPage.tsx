@@ -1,26 +1,24 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import Footer from './Footer'
-import './MainPage.css'
+import React from "react";
+import { Link } from "react-router-dom";
+import Footer from "./Footer";
+import NavBar from "./NavBar";
+import "./MainPage.css";
 const MainPage = () => {
   return (
     <div className="main-page">
-      <div className="navbar">
-        <div className="navlinks">
-          <Link to='/' className="nav-link">Home</Link>
-          <Link to='/' className="nav-link">About</Link>
-          <Link to='/login' className="nav-link">Contact</Link>
-          <Link to='/login' className="nav-link">Community LogIn</Link>
-          <Link to='/orglogin' className="nav-link">Organization Login</Link>
-        </div>
-      </div>
+      <NavBar />
       <div className="content"></div>
-      
-
-      
-      <Footer/>
+      <div className="content-div">
+        
+        <Link to="/login">Individual LogIn</Link>
+      </div>
+      <div className="content-div">
+        <Link to="/orglogin">Organization Login</Link>
+        
+      </div>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
 export default MainPage;
