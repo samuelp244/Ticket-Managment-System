@@ -11,6 +11,8 @@ import SignUpOrg from './components/forms/RootUserForms/SignUpOrg';
 import MainPage from './components/MainPage';
 import About from './components/About';
 import Contact from './components/Contact';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -30,9 +32,6 @@ function App() {
           <Route path="/orguserdb" element={<OrgUserDashBoard/>}></Route>
         </Routes>
       </Router>
-      {/* <MainPage/>
-      <SignUpComm/>
-      <Footer/> */}
     </div>
   );
 }

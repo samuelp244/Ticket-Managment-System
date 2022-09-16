@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import "./MainPage.css";
+import { ReactSVG } from "react";
+
+
 const MainPage = () => {
   return (
     <div className="main-page">
