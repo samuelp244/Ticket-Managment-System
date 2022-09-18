@@ -3,7 +3,11 @@ import "./LoginComm.css";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
-const LogInComm = () => {
+interface loginProps{
+  loggedIn:()=>Promise<any>;
+}
+
+const LogInComm = (props:loginProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,23 +19,33 @@ const LogInComm = () => {
     Axios.post("http://localhost:1337/api/v1/loginUser", {
       email: email,
       password: password,
-    }).then((res) => {
+    }).then(async(res) => {
       
       if (res.statusText === "OK") {
+
         if (res.data.status === "ok" && res.data.user === true) {
-          if(res.data.role === "customer"){navigate("/commdashboard",{
+          
+          // console.log("hi")
+          if(res.data.role === "customer"){
+            await props.loggedIn();
+            navigate("/commdashboard",{
             state:{
               username:res.data.username,
-            }
-          })}
-          if(res.data.role === "employee"){navigate("/orguserdb",{
+            },
+            replace: true 
+          })
+          }
+
+          if(res.data.role === "employee"){
+            await props.loggedIn();
+            navigate("/orguserdb",{
             state:{
               username:res.data.username,
             }
           })
 
           }
-
+          
         } else {
           alert("Login failed! check password");
         }

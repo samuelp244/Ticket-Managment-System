@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RaiseTicket from "../forms/CustomerForms/RaiseTicket";
 import OrgList from "../others/OrgList";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { CgProfile } from "react-icons/cg";
 
@@ -23,7 +23,11 @@ export interface ticketstate {
   _id: string;
 }
 
-const CommDashBoard = () => {
+interface dashboardProps{
+  loggedOut:()=>void
+}
+
+const CommDashBoard = (props:dashboardProps) => {
   const [selectedOrg, setSelectedOrg] = useState("");
   const [tickets, setTickets] = useState<ticketstate[]>();
   //profile edit
@@ -41,12 +45,16 @@ const CommDashBoard = () => {
   const stopEdit = () => {
     setEditProfile(false);
   };
-
+  
   const location = useLocation() as locationState;
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(location.state === null) navigate("/login")
+  },[location,navigate])
 
   useEffect(() => {
     Axios.get(
-      `http://localhost:1337/api/v1/getUserTickets?username=${location.state.username}`
+      `http://localhost:1337/api/v1/getUserTickets?username=${location.state?.username}`
     ).then((res) => {
       setTickets(res.data.tickets);
     });
@@ -65,7 +73,7 @@ const CommDashBoard = () => {
     e.preventDefault();
     // console.log(Obj)
     Axios.put("http://localhost:1337/api/v1/editCustomer", {
-      username: location.state.username, //fixed
+      username: location.state?.username, //fixed
       email: newEmail,
       phone: newPhone,
     }).then((res) => {
@@ -74,22 +82,32 @@ const CommDashBoard = () => {
       setNewPhone("");
     });
   };
-
+  
+  const LogoutHandler = ()=>{
+    props.loggedOut()
+    navigate('/login')
+  }
   return (
+<>{
+(localStorage.getItem("userLoggedIn")==="true")?
     <div>
       <div className="commdash_header">
         <h1>Community DashBoard</h1>
         <h4>
           {!editProfile && <CgProfile onClick={startEdit} />}{" "}
-          {location.state.username}
+          {location.state?.username}
+          <button onClick={()=>{
+            LogoutHandler()
+            }}>Logout</button>
         </h4>
+        
       </div>
 
       {editProfile && (
         <form onSubmit={profileEditHandler}>
           <h1>Edit profile</h1>
           <div className="details">
-            username: {location.state.username}
+            username: {location.state?.username}
             <input
               type="email"
               placeholder="enter your email address"
@@ -123,7 +141,7 @@ const CommDashBoard = () => {
         {selectedOrg !== "" ? (
           <RaiseTicket
             orgName={selectedOrg}
-            username={location.state.username}
+            username={location.state?.username}
           />
         ) : null}
       </div>
@@ -222,7 +240,7 @@ const CommDashBoard = () => {
           )}
         </div>
       </div>
-    </div>
+    </div>:null}</>
   );
 };
 

@@ -3,10 +3,12 @@ import "./LoginOrg.css";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
+interface loginProps{
+  loggedIn:()=>Promise<any>;
+}
 
 
-
-const LogInOrg = () => {
+const LogInOrg = (props:loginProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,6 +24,7 @@ const LogInOrg = () => {
       console.log(res.data);
       if (res.data.status === "ok") {
         if (res.data.role === "rootUser") {
+          props.loggedIn();
           navigate("/orgdashboard",{
             state:{
               username:res.data.username,

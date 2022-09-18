@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation} from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 import Axios from "axios";
 import "./OrgDashBoard.css";
 import {CgProfile} from "react-icons/cg"
@@ -29,7 +29,11 @@ export interface ticketstate{
   _id: string,
 }
 
-const OrgDashboard = () => {
+interface dashboardProps{
+  loggedOut:()=>void
+}
+
+const OrgDashboard = (props:dashboardProps) => {
   const [userName, setUserName] = useState("");
   const [dom, setDom] = useState("");
   const [email, setEmail] = useState("");
@@ -51,6 +55,11 @@ const OrgDashboard = () => {
   const stopAdding = () => {
     setAddUser(false);
   };
+
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(location.state === null) navigate("/login")
+  },[location,navigate])
 
   const submitHandler = (e: any) => {
     e.preventDefault();
@@ -102,14 +111,23 @@ const OrgDashboard = () => {
     })
   },[location])
 
+  const LogoutHandler = ()=>{
+    props.loggedOut()
+    navigate('/login')
+  }
 
   
 
   return (
+    <>{
+      (localStorage.getItem("userLoggedIn")==="true")?
     <div>
       <header className="orgdash_header">
         <h1>Organization Dashboard</h1>
         <h2><CgProfile/>  {location.state.username}</h2>
+        <button onClick={()=>{
+            LogoutHandler()
+            }}>Logout</button>
       </header>
       
       
@@ -253,7 +271,7 @@ const OrgDashboard = () => {
         </div>
         
       </div>
-    </div>
+    </div>:null}</>
   );
 };
 

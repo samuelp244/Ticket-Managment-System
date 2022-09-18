@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {CgProfile} from "react-icons/cg"
 import './EmployeeDashboard.css'
 
@@ -21,7 +21,11 @@ export interface ticketstate {
   _id: string;
 }
 
-const OrgUserDashBoard = () => {
+interface dashboardProps{
+  loggedOut:()=>void
+}
+
+const OrgUserDashBoard = (props:dashboardProps) => {
   const [tickets, setTickets] = useState<ticketstate[]>();
 
   const location = useLocation() as locationState;
@@ -35,6 +39,12 @@ const OrgUserDashBoard = () => {
       setTickets(res.data.tickets);
     });
   }, [location]);
+
+  const navigate = useNavigate();
+  useEffect(()=>{
+    console.log(location.state)
+    if(location.state === null) navigate("/login")
+  },[location,navigate])
 
   const acceptHandler = (id: string) => {
     Axios.get(
@@ -51,12 +61,20 @@ const OrgUserDashBoard = () => {
       setTickets(res.data.tickets);
     });
   };
-
+  const LogoutHandler = ()=>{
+    props.loggedOut()
+    navigate('/login')
+  }
   return (
+    <>{
+      // (localStorage.getItem("userLoggedIn")==="true")?
     <div>
       <div className="empdash_header">
         <h1>emp DashBoard</h1>
         <h2><CgProfile/> {location.state.username}</h2>
+        <button onClick={()=>{
+            LogoutHandler()
+            }}>Logout</button>
       </div>
       
       <hr />
@@ -153,6 +171,8 @@ const OrgUserDashBoard = () => {
         </div>
       </div>
     </div>
+    // :null
+    }</>
   );
 };
 

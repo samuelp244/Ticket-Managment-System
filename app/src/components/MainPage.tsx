@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
@@ -7,9 +7,10 @@ import { ReactSVG } from "react";
 
 
 const MainPage = () => {
+  
   return (
     <div className="main-page">
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="content"></div>
       <div className="content-div">
         
@@ -19,7 +20,7 @@ const MainPage = () => {
         <Link to="/orglogin">Organization Login</Link>
         
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
