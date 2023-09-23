@@ -1,6 +1,5 @@
 # Ticket-Managment-System
 
-https://www.ticketeasy.tk/
 
 This Repo is outdated
 
